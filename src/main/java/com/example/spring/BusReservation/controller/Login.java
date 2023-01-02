@@ -44,7 +44,6 @@ public class Login {
 	   throws UserNotFoundException{
 		User updated=userservice.createOrUpdateUser(user);
 		return new ResponseEntity<User>(updated,new HttpHeaders(),HttpStatus.CREATED);
-		Kishore
 	
 	}
 

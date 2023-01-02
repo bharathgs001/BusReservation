@@ -8,8 +8,4 @@ import com.example.spring.BusReservation.model.User;
 
 public interface UserRepository extends JpaRepository<User,String> {
 
-	
-
-	
-	
 }

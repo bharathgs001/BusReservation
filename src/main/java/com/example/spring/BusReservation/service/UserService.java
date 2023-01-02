@@ -17,9 +17,9 @@ import com.example.spring.BusReservation.repository.UserRepository;
 public class UserService {
 
 	@Autowired
-	
+
 	UserRepository userrepository;
-	
+
 	public List<User> getUsers() {
 		List<User> users=userrepository.findAll();
 		if(users.size()>0)
@@ -30,27 +30,27 @@ public class UserService {
 		{
 			return new ArrayList<User>();
 		}
-		}
-	
+	}
+
 	public User createOrUpdateUser(User user) throws UserNotFoundException{
-		
-	Optional<User> users=userrepository.findById(user.getEmailId());
-	if(users.isPresent())
-	{
-		User newUser=users.get();
-		newUser.setEmailId(user.getEmailId());
-		newUser.setPassword(user.getPassword());
-		newUser=userrepository.save(newUser);
-		return newUser;
-	}
-	else
-	{
-		user=userrepository.save(user);
-		return user;
-		
+
+		Optional<User> users=userrepository.findById(user.getEmailId());
+		if(users.isPresent())
+		{
+			User newUser=users.get();
+			newUser.setEmailId(user.getEmailId());
+			newUser.setPassword(user.getPassword());
+			newUser=userrepository.save(newUser);
+			return newUser;
+		}
+		else
+		{
+			user=userrepository.save(user);
+			return user;
+
+		}
+
 	}
 
-}
 
-	
 }
