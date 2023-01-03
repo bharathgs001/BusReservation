@@ -1,5 +1,7 @@
 package com.example.spring.BusReservation.model;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
@@ -7,7 +9,7 @@ import jakarta.persistence.Id;
 @Entity
 
 public class Bus {
-	
+	 
 		@Id
 		@Column(name = "busno")
 		private int busno;
