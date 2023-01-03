@@ -1,5 +1,7 @@
 package com.example.spring.BusReservation.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -22,7 +24,12 @@ public class BusController {
 	@Autowired
 	BusService busesService;
 
-	
+	@GetMapping
+	public ResponseEntity<List<Bus>>getBuses(){
+		List<Bus> list= busesService.getBuses();
+
+		return new ResponseEntity <List<Bus>>(list, new HttpHeaders(), HttpStatus.OK);
+	}
 	@GetMapping("/{busno}")
 	public ResponseEntity<Bus> getBusesById(@PathVariable("busno") int busno) throws BusNotFoundException{
 		Bus entity=busesService.getBusesById(busno);
@@ -30,7 +37,7 @@ public class BusController {
 		return new ResponseEntity<Bus>(entity,new HttpHeaders(),HttpStatus.ACCEPTED);
 	}
 
-	@PostMapping("/{busno}")
+	@PostMapping
 	public ResponseEntity<Bus> createOrUpdateBuses(@RequestBody Bus bus) throws BusNotFoundException{
 		Bus updated=busesService.createOrUpdateBuses(bus);
 		return new ResponseEntity<Bus>(updated,new HttpHeaders(),HttpStatus.CREATED);
