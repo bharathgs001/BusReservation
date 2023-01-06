@@ -17,35 +17,40 @@ import org.springframework.web.bind.annotation.RestController;
 import com.example.spring.BusReservation.model.Bus;
 import com.example.spring.BusReservation.model.BusNotFoundException;
 import com.example.spring.BusReservation.service.BusService;
+
 @RestController
 @RequestMapping("/bus")
 public class BusController {
+	
 
-	@Autowired
-	BusService busesService;
+		@Autowired
+		BusService busesService;
 
-	@GetMapping
-	public ResponseEntity<List<Bus>>getBuses(){
-		List<Bus> list= busesService.getBuses();
+		@GetMapping
+		public ResponseEntity<List<Bus>> getBuses(){
+			List<Bus> list=busesService.getBuses();
+			
+			return new ResponseEntity<List<Bus>>(list,new HttpHeaders(),HttpStatus.ACCEPTED);
+		}
+		
+		@GetMapping("/{busno}")
+		public ResponseEntity<Bus> getBusesById(@PathVariable("busno") int busno) throws BusNotFoundException{
+			Bus entity=busesService.getBusesById(busno);
 
-		return new ResponseEntity <List<Bus>>(list, new HttpHeaders(), HttpStatus.OK);
+			return new ResponseEntity<Bus>(entity,HttpStatus.ACCEPTED);
+		}
+
+		@PostMapping
+		public ResponseEntity<Bus> createOrUpdateBuses(@RequestBody Bus bus) throws BusNotFoundException{
+			Bus updated=busesService.createOrUpdateBuses(bus);
+			return new ResponseEntity<Bus>(updated,HttpStatus.CREATED);
+		}
+
+		@DeleteMapping("/{busno}")
+		public HttpStatus deleteBuses(@PathVariable("busno") Integer busno) throws BusNotFoundException{
+			busesService.deleteBuses(busno);
+			return HttpStatus.GONE;
+			
+		}
 	}
-	@GetMapping("/{busno}")
-	public ResponseEntity<Bus> getBusesById(@PathVariable("busno") int busno) throws BusNotFoundException{
-		Bus entity=busesService.getBusesById(busno);
 
-		return new ResponseEntity<Bus>(entity,new HttpHeaders(),HttpStatus.ACCEPTED);
-	}
-
-	@PostMapping
-	public ResponseEntity<Bus> createOrUpdateBuses(@RequestBody Bus bus) throws BusNotFoundException{
-		Bus updated=busesService.createOrUpdateBuses(bus);
-		return new ResponseEntity<Bus>(updated,new HttpHeaders(),HttpStatus.CREATED);
-	}
-
-	@DeleteMapping("/{busno}")
-	public HttpStatus deleteBuses(@PathVariable("busno") Integer busno) throws BusNotFoundException{
-		busesService.deleteBuses(busno);
-		return HttpStatus.GONE;
-	}
-}
