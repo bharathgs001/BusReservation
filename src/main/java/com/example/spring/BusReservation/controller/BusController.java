@@ -26,7 +26,7 @@ public class BusController {
 		@Autowired
 		BusService busesService;
 
-		@GetMapping
+		@GetMapping("/list")
 		public ResponseEntity<List<Bus>> getBuses(){
 			List<Bus> list=busesService.getBuses();
 			

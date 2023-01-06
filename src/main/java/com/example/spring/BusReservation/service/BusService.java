@@ -32,17 +32,6 @@ public class BusService {
 				return new ArrayList<Bus>();
 			}
 		}
-//
-//		public List<Bus> getBuses(){
-//			List<Bus> buses=busesrepository.findAll();
-//
-//			if (buses.size()>0) {
-//				return buses;
-//			}
-//			else {
-//				return new ArrayList<Bus>();
-//			}
-//		}
 
 		public Bus getBusesById(Integer busno) throws BusNotFoundException{
 			Optional<Bus> buses=busesrepository.findById(busno);

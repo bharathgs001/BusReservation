@@ -28,7 +28,7 @@ public class PassengerController {
 		Passenger updated=passengerService.createOrUpdatePassengers(passenger);
 		return new ResponseEntity<Passenger>(updated,new HttpHeaders(),HttpStatus.CREATED);
 	}
-	@GetMapping("/view")
+	@GetMapping("/list")
 	public ResponseEntity<List<Passenger>>getPassengers() throws PassengerNotFoundException{
 		List<Passenger> list= passengerService.getPassengers1();
 
