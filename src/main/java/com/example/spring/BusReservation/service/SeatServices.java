@@ -1,13 +1,13 @@
 package com.example.spring.BusReservation.service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.example.spring.BusReservation.model.Bus;
-import com.example.spring.BusReservation.model.BusNotFoundException;
+
 import com.example.spring.BusReservation.model.Seat;
 import com.example.spring.BusReservation.model.SeatNotFoundException;
 import com.example.spring.BusReservation.repository.SeatRepository;
@@ -26,11 +26,13 @@ public class SeatServices {
 		{
 			return seats;
 		}
-		return null;
+		else {
+			return new ArrayList<Seat>();
+		}
 		
 	}
 
-	public Seat findSeats(int seatno) {
+	public Seat getSeatById(Integer seatno) throws SeatNotFoundException{
 		Optional<Seat> seat=seatrepository.findById(seatno);
 		if(seat.isPresent())
 		{
@@ -42,33 +44,34 @@ public class SeatServices {
 		}
 	}
 	@Transactional
-	public Seat createOrUpdateSeat(Seat seat) throws SeatNotFoundException{
+	public Seat createOrUpdateSeats(Seat seat) throws SeatNotFoundException{
 		Optional<Seat> seat1=seatrepository.findById(seat.getSeatNo());
 
 		if(seat1.isPresent()) {
-			Seat newSeat=seat1.get();
-			newSeat.setSeatNo(100);
-			newSeat.setSeatPrice(200);
+			Seat newSeats=seat1.get();
+			newSeats.setSeatNo(0);
+			newSeats.setSeatPrice(500);
 			
-			newSeat=seatrepository.save(newSeat);
+			newSeats=seatrepository.save(newSeats);
 
-			return newSeat;
+			return newSeats;
 		}
-		else {
-			seat=seatrepository.save(seat);
-
-			return seat;
-		}
+		return null;
 		
 	}
-	public void deleteSeat(Integer seatno) throws BusNotFoundException{
+	public void deleteSeat(Integer seatno) throws SeatNotFoundException{
 		Optional<Seat> seats = seatrepository.findById(seatno);
 
 		if(seats.isPresent()) {
 			seatrepository.deleteById(seatno);
 		}
 		else {
-			throw new BusNotFoundException("No such buses found");
+			throw new SeatNotFoundException("No such seats found");
 		}
+	}
+
+	public Seat findSeat(int seatno) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }
