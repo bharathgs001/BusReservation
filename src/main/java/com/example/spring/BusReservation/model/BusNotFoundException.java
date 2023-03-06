@@ -1,6 +1,5 @@
 package com.example.spring.BusReservation.model;
 
-import org.springframework.web.bind.annotation.ResponseStatus;
 
 @SuppressWarnings("serial")
 

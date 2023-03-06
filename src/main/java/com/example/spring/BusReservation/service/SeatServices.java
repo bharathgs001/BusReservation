@@ -31,9 +31,7 @@ public class SeatServices {
 		}
 		
 	}
-
-	public Seat findSeat(Integer seatno) throws SeatNotFoundException{
-		int count=seatno;
+	public Seat getSeatById(Integer seatno) throws SeatNotFoundException{
 		Optional<Seat> seat=seatrepository.findById(seatno);
 		
 		if(seat.isPresent())
@@ -50,22 +48,20 @@ public class SeatServices {
 			throw new SeatNotFoundException("seats not available");
 		}
 	}
-
-	public Seat createOrUpdateSeats(Seat seatno) throws SeatNotFoundException{
-		Optional<Seat> seat1=seatrepository.findById(seatno.getSeatNo());
+	@Transactional
+	public Seat createOrUpdateSeats(Seat seat) throws SeatNotFoundException{
+		Optional<Seat> seat1=seatrepository.findById(seat.getSeatNo());
 
 		if(seat1.isPresent()) {
 			Seat newSeats=seat1.get();
-			newSeats.setSeatNo(4);
-			newSeats.setSeatPrice(200);
-		    newSeats=seatrepository.save(newSeats);
-             return newSeats;
-		}
-		else {
-			seatno=seatrepository.save(seatno);
+			newSeats.setSeatNo(0);
+			newSeats.setSeatPrice(500);
+			
+			newSeats=seatrepository.save(newSeats);
 
-			return seatno;
+			return newSeats;
 		}
+		return null;
 		
 	}
 	public void deleteSeat(Integer seatno) throws SeatNotFoundException{
@@ -79,5 +75,7 @@ public class SeatServices {
 		}
 	}
 
-	
+	public Seat findSeat(int seatno) {
+		return null;
+	}
 }

@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 public class SeatNotFoundException extends RuntimeException {
 	public  SeatNotFoundException(String exception) {
 		super(exception);
+
 	}
 	public  SeatNotFoundException(String exception, Throwable t) {
 		super(exception, t);

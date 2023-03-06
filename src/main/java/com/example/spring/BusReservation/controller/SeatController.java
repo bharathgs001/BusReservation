@@ -33,7 +33,8 @@ public class SeatController {
 	}
 	@GetMapping("/{seatno}")
 	public ResponseEntity<Seat> findSeat(@PathVariable("seatno") int seatno) throws SeatNotFoundException {
-		Seat seat = seatservice.findSeat(seatno);
+
+		Seat seat = seatservice. findSeat(seatno);
 		return new ResponseEntity<Seat>(seat, HttpStatus.OK);
 
 	}
