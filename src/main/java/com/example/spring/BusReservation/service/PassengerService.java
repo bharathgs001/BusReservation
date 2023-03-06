@@ -36,7 +36,7 @@ public class PassengerService {
 		}
 	}
 	public List<Passenger> getPassengers1(){
-		List<Passenger> passenger=passengerRepository.findAll();
+		List<Passenger> passenger=(List<Passenger>) passengerRepository.findAll();
 
 		if (passenger.size()>0) {
 			return passenger;

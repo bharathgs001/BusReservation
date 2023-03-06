@@ -16,7 +16,10 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.example.spring.BusReservation.model.Bus;
 import com.example.spring.BusReservation.model.BusNotFoundException;
+import com.example.spring.BusReservation.model.Seat;
+import com.example.spring.BusReservation.model.SeatNotFoundException;
 import com.example.spring.BusReservation.service.BusService;
+import com.example.spring.BusReservation.service.SeatServices;
 
 @RestController
 @RequestMapping("/bus")
@@ -25,6 +28,12 @@ public class BusController {
 
 		@Autowired
 		BusService busesService;
+		
+		@GetMapping("/display")
+		public String display()
+		{
+			return "<<<<<<<Welcome to GREENBUS>>>>>>>>>>";
+		}
 
 		@GetMapping("/list")
 		public ResponseEntity<List<Bus>> getBuses(){
@@ -52,5 +61,8 @@ public class BusController {
 			return HttpStatus.GONE;
 			
 		}
-	}
+		
+
+			}
+	
 

@@ -2,6 +2,7 @@
 package com.example.spring.BusReservation.service;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -32,12 +33,11 @@ public class BusService {
 				return new ArrayList<Bus>();
 			}
 		}
-
 		public Bus getBusesById(Integer busno) throws BusNotFoundException{
-			Optional<Bus> buses=busesrepository.findById(busno);
+			Optional<Bus> travels=busesrepository.findById(busno);
 
-			if (buses.isPresent()) {
-				return buses.get();
+			if (travels.isPresent()) {
+				return travels.get();
 			}
 			else {
 				throw new BusNotFoundException("buses not available");
@@ -45,10 +45,10 @@ public class BusService {
 		}
 
 		public Bus createOrUpdateBuses(Bus bus) throws BusNotFoundException{
-			Optional<Bus> bus1=busesrepository.findById(bus.getBusno());
+			Optional<Bus> travels1=busesrepository.findById(bus.getBusno());
 
-			if(bus1.isPresent()) {
-				Bus newBuses=bus1.get();
+			if(travels1.isPresent()) {
+				Bus newBuses=travels1.get();
 				newBuses.setBusno(2);
 				newBuses.setTotalseats(100);
 				newBuses.setSeaterorsleeper("seater");
